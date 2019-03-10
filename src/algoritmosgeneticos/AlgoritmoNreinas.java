@@ -29,10 +29,13 @@ public class AlgoritmoNreinas {
         
         configuraciones.add(c1);
         configuraciones.add(c2);
+        
+        
         // manager
         Manager m = new Manager("Manager1",c1.getTamGenotipo());
         m.generarGeneticos(configuraciones);
         m.ejecutarGeneticos();
-    }
-    
+        
+        
+    }  
 }

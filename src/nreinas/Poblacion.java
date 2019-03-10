@@ -50,9 +50,9 @@ public class Poblacion {
             idMejor = x;
             }
         }
-     return new Individuo(this.indivduos.get(idMejor).getGenotipo());
-       
+     return new Individuo(this.indivduos.get(idMejor).getGenotipo());   
     }
+    
     public ArrayList<Individuo> getMuestraAleatoria(int n){
       // validar que n <= tamaño de la población
       if(n<this.indivduos.size()){

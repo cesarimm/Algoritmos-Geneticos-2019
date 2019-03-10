@@ -5,22 +5,41 @@
  */
 package nreinas;
 
+import java.util.ArrayList;
+import javax.swing.DefaultListModel;
+
 /**
  *
  * @author Roberto Cruz Leija
  */
 public class ManagerJFrame extends javax.swing.JFrame {
     Configuracion conf;
+    GeneticoNReinas gen; 
+    ArrayList<Configuracion> configuraciones;//= new ArrayList<>();
     /**
      * Creates new form ManagerJFrame
      */
+    
+      public ManagerJFrame(ArrayList<Configuracion> configuraciones) {
+          //this.configuraciones.add(conf);
+           initComponents();
+           this.configuraciones = configuraciones;
+           this.contador.setText(Integer.toString(configuraciones.size()));
+           //Crear funcion para agregar el modelo
+          cambiarModelo();
+            
+      }
+    
     public ManagerJFrame() {
         initComponents();
-       conf = new Configuracion(1000000, 100, 0.00001, 0.2,new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.RANDOM,Seleccion.TipoSeleccion.TORNEO},15);
-       GeneticoNReinas gen = new GeneticoNReinas(conf);
-       Thread hilo = new Thread(gen);
-       hilo.start();
-        System.out.println();
+     //  conf = new Configuracion(1000000, 100, 0.00001, 0.2,new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.RANDOM,Seleccion.TipoSeleccion.TORNEO},15);
+//       gen = new GeneticoNReinas(conf);
+//       Thread hilo = new Thread(gen);
+//       hilo.start();
+       System.out.println();
+       
+       
+        //gen.getPoblacionActual().getMejor().getFitness();
     }
 
     /**
@@ -32,37 +51,196 @@ public class ManagerJFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTextArea1 = new javax.swing.JTextArea();
+        jToggleButton1 = new javax.swing.JToggleButton();
         jButtonMuta = new javax.swing.JButton();
         jTextFieldMuta = new javax.swing.JTextField();
+        jTextFieldGeneraciones = new javax.swing.JTextField();
+        jButtonGeneraciones = new javax.swing.JButton();
+        jTextFieldPoblacion = new javax.swing.JTextField();
+        jButtonPoblacion = new javax.swing.JButton();
+        jTextFieldMuestra = new javax.swing.JTextField();
+        jButtonMuestreo = new javax.swing.JButton();
+        jButtonTablero = new javax.swing.JButton();
+        jTextFieldTablero = new javax.swing.JTextField();
+        jButtonStart = new javax.swing.JButton();
+        jLabel1 = new javax.swing.JLabel();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jList1 = new javax.swing.JList<>();
+        jButton1 = new javax.swing.JButton();
+        contador = new javax.swing.JLabel();
+        jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
+
+        jTextArea1.setColumns(20);
+        jTextArea1.setRows(5);
+        jScrollPane1.setViewportView(jTextArea1);
+
+        jToggleButton1.setText("jToggleButton1");
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButtonMuta.setText("Cambiar Muta");
+        jButtonMuta.setText("Prob Muta");
         jButtonMuta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonMutaActionPerformed(evt);
             }
         });
 
+        jButtonGeneraciones.setText("Generaciones");
+        jButtonGeneraciones.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonGeneracionesActionPerformed(evt);
+            }
+        });
+
+        jTextFieldPoblacion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jTextFieldPoblacionActionPerformed(evt);
+            }
+        });
+
+        jButtonPoblacion.setText("Población");
+
+        jButtonMuestreo.setText("Prob Muestreo");
+        jButtonMuestreo.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonMuestreoActionPerformed(evt);
+            }
+        });
+
+        jButtonTablero.setText("Tablero");
+        jButtonTablero.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonTableroActionPerformed(evt);
+            }
+        });
+
+        jButtonStart.setText("Start");
+        jButtonStart.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonStartActionPerformed(evt);
+            }
+        });
+
+        jLabel1.setText("Cambiar valores");
+
+        jList1.setModel(new javax.swing.AbstractListModel<String>() {
+            String[] strings = { "Item 1", "Item 2", "Item 3", "Item 4", "Item 5" };
+            public int getSize() { return strings.length; }
+            public String getElementAt(int i) { return strings[i]; }
+        });
+        jList1.addComponentListener(new java.awt.event.ComponentAdapter() {
+            public void componentHidden(java.awt.event.ComponentEvent evt) {
+                jList1ComponentHidden(evt);
+            }
+        });
+        jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
+                jList1ValueChanged(evt);
+            }
+        });
+        jScrollPane2.setViewportView(jList1);
+
+        jButton1.setText("Agregar Configuración");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
+        contador.setText("0");
+
+        jLabel2.setText("Configuraciones");
+
+        jLabel3.setText("Intercambios");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addComponent(jTextFieldMuta, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButtonMuta)
-                .addContainerGap(201, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(jTextFieldMuestra)
+                            .addComponent(jTextFieldPoblacion)
+                            .addComponent(jTextFieldMuta, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldGeneraciones, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jTextFieldTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 76, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addComponent(jButtonMuta, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonGeneraciones, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonPoblacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonMuestreo, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(jButtonTablero, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(18, 18, 18)
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(31, 31, 31)
+                                .addComponent(jButton1))
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(69, 69, 69)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jButtonStart)))))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(101, 101, 101)
+                        .addComponent(jLabel1)
+                        .addGap(64, 64, 64)
+                        .addComponent(jLabel2)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(contador)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(19, 19, 19)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButtonMuta)
-                    .addComponent(jTextFieldMuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(258, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(38, 38, 38)
+                        .addComponent(jLabel1))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(contador))))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldGeneraciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonGeneraciones))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldPoblacion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonPoblacion))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(jTextFieldMuta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(jButtonMuta)))
+                            .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jTextFieldMuestra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jButtonMuestreo))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jButtonTablero)
+                            .addComponent(jTextFieldTablero, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(20, 20, 20)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addComponent(jButtonStart)
+                        .addGap(39, 39, 39)
+                        .addComponent(jLabel3)))
+                .addContainerGap(93, Short.MAX_VALUE))
         );
 
         pack();
@@ -70,8 +248,78 @@ public class ManagerJFrame extends javax.swing.JFrame {
 
     private void jButtonMutaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMutaActionPerformed
         double muta = Double.parseDouble(jTextFieldMuta.getText());
-       conf.setProbMuta(muta);
+      // conf.setProbMuta(muta);
+      // System.out.println("Muta");
+      this.configuraciones.get(this.jList1.getSelectedIndex()).setProbMuta(muta);
     }//GEN-LAST:event_jButtonMutaActionPerformed
+
+    private void jTextFieldPoblacionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jTextFieldPoblacionActionPerformed
+        // TODO add your handling code here:
+          this.configuraciones.get(this.jList1.getSelectedIndex()).setTamPoblacion(Integer.parseInt(this.jTextFieldPoblacion.getText()));
+         // System.out.println("Poblacion");
+    }//GEN-LAST:event_jTextFieldPoblacionActionPerformed
+
+    private void jButtonGeneracionesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonGeneracionesActionPerformed
+        // TODO add your handling code here:
+        this.configuraciones.get(this.jList1.getSelectedIndex()).setNumGeneraciones(Integer.parseInt(this.jTextFieldGeneraciones.getText()));
+        System.out.println("Generaciones");
+    }//GEN-LAST:event_jButtonGeneracionesActionPerformed
+
+    private void jButtonMuestreoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonMuestreoActionPerformed
+        // TODO add your handling code here:
+        this.configuraciones.get(this.jList1.getSelectedIndex()).setpMuestra(Double.parseDouble(this.jTextFieldMuestra.getText()));
+         System.out.println("Muestreo");
+    }//GEN-LAST:event_jButtonMuestreoActionPerformed
+
+    private void jButtonTableroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonTableroActionPerformed
+        // TODO add your handling code here:
+        this.configuraciones.get(this.jList1.getSelectedIndex()).setTamGenotipo(Integer.parseInt(this.jTextFieldTablero.getText()));
+         System.out.println("Genotipo");
+    }//GEN-LAST:event_jButtonTableroActionPerformed
+
+    private void jButtonStartActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonStartActionPerformed
+        // TODO add your handling code here:
+        //(int numGeneraciones, int tamPoblacion, double probMuta, double pMuestra, Seleccion.TipoSeleccion[] tipoSeleccion, int tamGenotipo) 
+//        conf = new Configuracion(Integer.parseInt(this.jTextFieldGeneraciones.getText()), 
+//                                 Integer.parseInt(this.jTextFieldPoblacion.getText()),
+//                                 Double.parseDouble(jTextFieldMuta.getText()), 
+//                                 Double.parseDouble(this.jTextFieldMuestra.getText()),
+//                                 new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.RANDOM,Seleccion.TipoSeleccion.TORNEO}, 
+//                                 Integer.parseInt(this.jTextFieldTablero.getText()));
+//        
+//       gen = new GeneticoNReinas(conf);
+//       Thread hilo = new Thread(gen);
+//       hilo.start();
+        Manager m = new Manager("Manager1",configuraciones.get(0).getTamGenotipo());
+        m.generarGeneticos(configuraciones);
+        m.ejecutarGeneticos();
+
+    }//GEN-LAST:event_jButtonStartActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        // TODO add your handling code here:
+        ConfiguracionJFrame conf = new ConfiguracionJFrame(configuraciones);
+        conf.setVisible(true);
+        this.dispose();
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jList1ComponentHidden(java.awt.event.ComponentEvent evt) {//GEN-FIRST:event_jList1ComponentHidden
+        // TODO add your handling code here:
+        System.out.println("Lista");
+    }//GEN-LAST:event_jList1ComponentHidden
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        // TODO add your handling code here:
+        int i=this.jList1.getSelectedIndex();
+        System.out.println(i);
+        //Primero extraer valores de cada configuracion
+             jTextFieldGeneraciones.setText(Integer.toString(this.configuraciones.get(i).getNumGeneraciones()));
+             jTextFieldPoblacion.setText(Integer.toString(this.configuraciones.get(i).getTamPoblacion()));        
+             jTextFieldMuta.setText(Double.toString(this.configuraciones.get(i).getProbMuta())); 
+             jTextFieldMuestra.setText(Double.toString(this.configuraciones.get(i).getpMuestra())); 
+             jTextFieldTablero.setText(Double.toString(this.configuraciones.get(i).getTamGenotipo())); 
+        ///Vamos a setear valores 
+    }//GEN-LAST:event_jList1ValueChanged
 
     /**
      * @param args the command line arguments
@@ -109,7 +357,34 @@ public class ManagerJFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel contador;
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButtonGeneraciones;
+    private javax.swing.JButton jButtonMuestreo;
     private javax.swing.JButton jButtonMuta;
+    private javax.swing.JButton jButtonPoblacion;
+    private javax.swing.JButton jButtonStart;
+    private javax.swing.JButton jButtonTablero;
+    private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
+    private javax.swing.JList<String> jList1;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextFieldGeneraciones;
+    private javax.swing.JTextField jTextFieldMuestra;
     private javax.swing.JTextField jTextFieldMuta;
+    private javax.swing.JTextField jTextFieldPoblacion;
+    private javax.swing.JTextField jTextFieldTablero;
+    private javax.swing.JToggleButton jToggleButton1;
     // End of variables declaration//GEN-END:variables
+
+    private void cambiarModelo() {
+       DefaultListModel dlm = new  DefaultListModel();
+       for(int i=0;i<this.configuraciones.size();i++){
+           dlm.addElement(configuraciones.get(i).getId());
+       }
+           this.jList1.setModel(dlm);
+    }
 }

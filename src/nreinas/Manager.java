@@ -19,6 +19,7 @@ public class Manager {
     private ArrayList<GeneticoNReinas> geneticos;
     private ArrayList<Configuracion> configuraciones;
     private int reinas;
+    
     public Manager (String id, int reinas){
         this.reinas = reinas;
         this.nG = 0;
@@ -27,6 +28,7 @@ public class Manager {
         this.configuraciones = new ArrayList<>();
         this.id = id;
     }
+    
     public void generarGeneticos(ArrayList<Configuracion> configuraciones){
     // crear los geneticos en base a las configuraciones
     this.nG = configuraciones.size();
@@ -36,6 +38,7 @@ public class Manager {
         this.geneticos.add(gen);
     }
     }
+    
     public void generarGeneticos(int nG){
     // crear los geneticos en base a las configuraciones
     for (int x=0; x<nG;x++){
@@ -44,6 +47,7 @@ public class Manager {
         this.geneticos.add(gen);
     }
     }
+    
     public void ejecutarGeneticos(){
     // ejecutar los geneticos en un hilo diferente
     for (GeneticoNReinas aux: this.geneticos){

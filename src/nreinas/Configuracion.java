@@ -17,6 +17,19 @@ public class Configuracion {
    private int mask[];
    private Seleccion.TipoSeleccion tipoSeleccion[];
    private int tamGenotipo;
+   private String id;
+   
+   
+    public Configuracion(String id, int numGeneraciones, int tamPoblacion, double probMuta, double pMuestra, Seleccion.TipoSeleccion[] tipoSeleccion, int tamGenotipo) {
+        this.numGeneraciones = numGeneraciones;
+        this.tamPoblacion = tamPoblacion;
+        this.probMuta = probMuta;
+        this.pMuestra = pMuestra;
+        this.mask = Cruza.generarMascaraAleatoria(tamGenotipo);
+        this.tipoSeleccion = tipoSeleccion;
+        this.tamGenotipo = tamGenotipo;
+        this.id=id;
+    }
    
     public Configuracion(int numGeneraciones, int tamPoblacion, double probMuta, double pMuestra, Seleccion.TipoSeleccion[] tipoSeleccion, int tamGenotipo) {
         this.numGeneraciones = numGeneraciones;
@@ -26,7 +39,9 @@ public class Configuracion {
         this.mask = Cruza.generarMascaraAleatoria(tamGenotipo);
         this.tipoSeleccion = tipoSeleccion;
         this.tamGenotipo = tamGenotipo;
+        id="";
     }
+    
    public Configuracion(int tamGenotipo) {
         this.numGeneraciones = 10000;
         this.tamPoblacion = 50;
@@ -35,6 +50,7 @@ public class Configuracion {
         this.mask = Cruza.generarMascaraAleatoria(tamGenotipo);
         this.tipoSeleccion = new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.TORNEO,Seleccion.TipoSeleccion.RANDOM};
         this.tamGenotipo = tamGenotipo;
+        id="";
     }
    
    
@@ -151,4 +167,10 @@ public class Configuracion {
     public void setTamGenotipo(int tamGenotipo) {
         this.tamGenotipo = tamGenotipo;
     }
+
+    public String getId() {
+        return id;
+    }
+    
+    
 }

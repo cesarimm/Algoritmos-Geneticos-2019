@@ -81,6 +81,13 @@ public class GeneticoNReinas implements Runnable{
         return manager;
     }
 
+    
+    public Poblacion getPoblacionActual() {
+        return poblacionActual;
+    }
+    
+    
+
     @Override
     public void run() {
         evolucionar();
