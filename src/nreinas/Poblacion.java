@@ -94,5 +94,14 @@ public class Poblacion {
             
     }
     
+    public void setMejor(Individuo ind){
+        this.indivduos.set(0, ind);
+    }
+    
+    
+    public void setMejores(ArrayList<Individuo> individuos){
+        this.indivduos = individuos;
+    }
+    
     
 }

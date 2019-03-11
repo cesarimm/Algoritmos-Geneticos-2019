@@ -22,10 +22,21 @@ public class ConfiguracionJFrame extends javax.swing.JFrame {
       public ConfiguracionJFrame(ArrayList<Configuracion> configuraciones) {
         initComponents();
         this.configuraciones=configuraciones;
+        this.jTextFieldGeneraciones.setText("1000000");
+        this.jTextFieldPoblacion.setText("30");
+        this.jTextFieldMuestra.setText("0.20");
+        this.jTextFieldMuta.setText("0.15");
+        this.jTextFieldTablero.setText("30");
     }
     
     public ConfiguracionJFrame() {
         initComponents();
+        this.configuraciones=configuraciones;
+        this.jTextFieldGeneraciones.setText("10000");
+        this.jTextFieldPoblacion.setText("30");
+        this.jTextFieldMuestra.setText("0.25");
+        this.jTextFieldMuta.setText("0.15");
+        this.jTextFieldTablero.setText("8");
     }
 
     /**

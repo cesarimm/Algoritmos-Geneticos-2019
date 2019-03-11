@@ -85,6 +85,10 @@ public class GeneticoNReinas implements Runnable{
     public Poblacion getPoblacionActual() {
         return poblacionActual;
     }
+
+    public void setPoblacionActual(Poblacion poblacionActual) {
+        this.poblacionActual = poblacionActual;
+    }
     
     
 

@@ -6,6 +6,7 @@
 package nreinas;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 
 /**
  *
@@ -57,5 +58,45 @@ public class Manager {
     this.ejecucion = true;
     }
     
+    //Vamos a cmabia la familia de un  gentico a otro genetico
+    public void setPoblacion(int conf1, int conf2){
+        Poblacion pob2=this.geneticos.get(conf2).getPoblacionActual();
+        ///Setear el tamaño del conf1 al conf2
+        this.configuraciones.get(conf1).setTamPoblacion(this.configuraciones.get(conf2).getTamPoblacion());
+        this.geneticos.get(conf1).setPoblacionActual(pob2);
+          for(int i=0;i<100;i++)
+            System.out.println("Cambio");
+    }
+    
+    
+    
+    public void setMejor(int conf1, int conf2){
+      
+        Individuo ind=this.geneticos.get(conf2).getPoblacionActual().getMejor();
+        this.geneticos.get(conf1).getPoblacionActual().setMejor(ind);
+  
+          for(int i=0;i<100;i++)
+            System.out.println("Seleccionar Mejor");
+    }
+    
+    
+    public void setMejores(int conf1, int conf2, int n){
+      
+        ArrayList<Individuo> individuos=this.geneticos.get(conf2).getPoblacionActual().getNMejores(n);
+        this.configuraciones.get(conf1).setTamPoblacion(n);
+        this.geneticos.get(conf1).getPoblacionActual().setMejores(individuos);
+        
+          for(int i=0;i<100;i++)
+            System.out.println("Cambiar varios");
+    }
+    
+    
+    public String getInfoGenetico(int i){
+        String aux="";  
+        aux=this.configuraciones.get(i).getId()+" Fitness: "+
+        this.geneticos.get(i).getPoblacionActual().getMejor().getFitness()+" "+Arrays.toString(this.geneticos.get(i).getPoblacionActual().getMejor().getGenotipo())+"\n";
+       
+        return aux;
+    }
     
 }

@@ -167,10 +167,12 @@ public class Configuracion {
     public void setTamGenotipo(int tamGenotipo) {
         this.tamGenotipo = tamGenotipo;
     }
+    
 
     public String getId() {
         return id;
     }
+    
     
     
 }
