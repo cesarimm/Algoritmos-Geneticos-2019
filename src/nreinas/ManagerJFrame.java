@@ -353,9 +353,9 @@ public class ManagerJFrame extends javax.swing.JFrame implements Runnable {
                                 .addComponent(jTextFieldNMejores, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jTextFieldDestino, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jButton2)
-                            .addComponent(jButton3))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jButton3)
+                            .addComponent(jButton2))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jButton4)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
@@ -543,7 +543,7 @@ public class ManagerJFrame extends javax.swing.JFrame implements Runnable {
     private void cambiarModelo() {
        DefaultListModel dlm = new  DefaultListModel();
        for(int i=0;i<this.configuraciones.size();i++){
-           dlm.addElement(configuraciones.get(i).getId());
+           dlm.addElement(i+" "+configuraciones.get(i).getId());
        }
            this.jList1.setModel(dlm);
     }

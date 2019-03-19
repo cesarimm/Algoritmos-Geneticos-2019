@@ -26,7 +26,7 @@ public class ConfiguracionJFrame extends javax.swing.JFrame {
         this.jTextFieldPoblacion.setText("30");
         this.jTextFieldMuestra.setText("0.20");
         this.jTextFieldMuta.setText("0.15");
-        this.jTextFieldTablero.setText("30");
+        this.jTextFieldTablero.setText("50");
     }
     
     public ConfiguracionJFrame() {
@@ -36,7 +36,7 @@ public class ConfiguracionJFrame extends javax.swing.JFrame {
         this.jTextFieldPoblacion.setText("30");
         this.jTextFieldMuestra.setText("0.25");
         this.jTextFieldMuta.setText("0.15");
-        this.jTextFieldTablero.setText("8");
+        this.jTextFieldTablero.setText("50");
     }
 
     /**
