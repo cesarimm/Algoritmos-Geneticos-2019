@@ -60,6 +60,7 @@ public class Individuo {
         // recorrer las clausulas
         this.fitness = 0;
         for (Clausula c:Tokenizador.clausulas){
+    //        System.out.println("");
             if(verificarClausula(c)){
                 this.fitness++;
             } 

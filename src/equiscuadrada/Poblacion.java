@@ -21,6 +21,7 @@ public class Poblacion {
             this.indivduos.add(new Individuo());
         
     }
+    
     public Poblacion(ArrayList<Individuo> aux){
         this.indivduos = (ArrayList<Individuo>)aux.clone();
     }
