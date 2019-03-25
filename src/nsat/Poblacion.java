@@ -6,6 +6,7 @@
 package nsat;
 
 import java.util.ArrayList;
+import nsat.Individuo;
 import java.util.Random;
 
 /**

@@ -12,6 +12,7 @@ import java.util.Random;
  * @author CESAR IVAN MTZ
  */
 public class Seleccion {
+    
     public static Individuo seleccionTorneo(nsat.Poblacion pob){
        Individuo mejor = new Individuo(pob.getMejor().getGenotipo());
         return mejor;

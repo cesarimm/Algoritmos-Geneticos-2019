@@ -5,11 +5,24 @@
  */
 package nsat;
 
+import java.util.Random;
+
 /**
  *
  * @author CESAR IVAN MTZ
  */
 public class Cruza {
+    
+    public static int[] generarMascaraAleatoria(int dim){
+    int mask[]= new int[dim];
+    Random ran = new Random();
+    
+    for(int x=0; x<dim;x++){
+    mask[x]=ran.nextInt(2);
+    }
+    return mask;
+    }
+    
      public static Individuo cruzaXMascara(int mask[], Individuo madre, Individuo padre){
         Individuo hijo1,hijo2;
         int geno1[] = new int[100];

@@ -5,8 +5,11 @@
  */
 package nsat;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Date;
 
 /**
  *
@@ -18,6 +21,7 @@ public class GeneticoSAT {
     private int tamPob, numGen;
     private double probMuta;
     private Poblacion poblacionSAT;
+    private int mask[];
     
     //Crear una poblacion de individuos
     //Crear Operadores Muta, Cruza, Seleccion
@@ -30,61 +34,76 @@ public class GeneticoSAT {
         this.tamPob=tamPob;
         this.probMuta=probMuta;
         this.poblacionSAT = new Poblacion(this.tamPob);
+        this.mask = Cruza.generarMascaraAleatoria(100);
         System.out.println("");
     }
     
-    public void evolucionar(){
- 
+       public void evolucionar(){
+    int mask2[] = Cruza.generarMascaraAleatoria(100);
+    Individuo mejor = null;
+    // generar las itereaciones para las generaciones
     for(int g=1;g<this.numGen;g++){
+        // garantizar construir una nueva población
         ArrayList<Individuo> ind = new ArrayList<>();
         for(int i=0; i<this.tamPob;i++){
-
-            Individuo madre = Seleccion.seleccionAleatoria(this.poblacionSAT);
+            // seleccionamos
+            Individuo madre = Seleccion.seleccionTorneo(this.poblacionSAT);
             Individuo padre = Seleccion.seleccionAleatoria(this.poblacionSAT);
             
-            int mCruza[] = new int[100];
-            
-            for(int j=0;j<mCruza.length;j++){
-                 if(j>50)
-                     mCruza[j]=1;
-                 else
-                     mCruza[j]=0;
-            }
-          
             // reproducimos
-            //Individuo hijo = Cruza.cruzaXMascara(mCruza, madre, padre);
-                Individuo hijo = Cruza.cruzaXMascara(new int[]{1,1,1,1,1,1,1,1,1,1,
-                                                               1,1,1,1,1,1,1,1,1,1,
-                                                               1,1,1,1,1,1,1,1,1,1,
-                                                               1,1,1,1,1,1,1,1,1,1,
-                                                               1,1,1,1,1,1,1,1,1,1,
-                                                               0,0,0,0,0,0,0,0,0,0,
-                                                               0,0,0,0,0,0,0,0,0,0,
-                                                               0,0,0,0,0,0,0,0,0,0,
-                                                               0,0,0,0,0,0,0,0,0,0,
-                                                               0,0,0,0,0,0,0,0,0,0}, madre, padre);
-                
+            Individuo hijo = Cruza.cruzaXMascara(mask2, madre, padre);
+            // mutamos 
+                // evaluar la probabilidad
             Muta.mutaBit(probMuta, hijo);
             // agregamos
             ind.add(hijo);
         }
         // actualizamos la nueva población
-        //this.poblacionSAT = new Poblacion(ind);
-      System.out.println(g);
+        this.poblacionSAT = new Poblacion(ind);
+       // pedimos el mejor a la poblacion 
+       mejor  = this.poblacionSAT.getMejor();
+       System.out.println(g+": "+mejor.getFitness());
+       if(this.poblacionSAT.getMejor().getFitness()==550)
+           break;
     }
-    // pedimos el mejor a la poblacion 
-        System.out.println("El mejor");
-    Individuo mejor  = this.poblacionSAT.getMejor();
+    
     System.out.println(mejor.getFitness());
-    System.out.println(Arrays.toString(mejor.getGenotipo())); 
+    System.out.println(Arrays.toString(mejor.getGenotipo()));
+        if(this.poblacionSAT.getMejor().getFitness()==550)
+            this.escribirIndividuo();
+       }
+    
+    
+    public void escribirIndividuo(){
+        
+       // java.util.Date fecha = new Date();
+       // System.out.println (fecha);   
+        try {
+            //Crear un objeto File se encarga de crear o abrir acceso a un archivo que se especifica en su constructor
+            File archivo = new File("Geno550.txt");
+
+            //Crear objeto FileWriter que sera el que nos ayude a escribir sobre archivo
+            FileWriter escribir = new FileWriter(archivo, true);
+
+
+            //Escribimos en el archivo con el metodo write 
+            escribir.write(Arrays.toString(this.poblacionSAT.getMejor().getGenotipo()));
+         
+            //Cerramos la conexion
+            escribir.close();
+        } //Si existe un problema al escribir cae aqui
+        catch (Exception e) {
+            System.out.println("Error al escribir");
+        }
     }
 
   public static void main(String args[]){
-      
       Tokenizador.leerDatos();
       
-      GeneticoSAT gSAT = new GeneticoSAT(50, 10000, .15);
+      GeneticoSAT gSAT = new GeneticoSAT(100, 100000, .25);
       gSAT.evolucionar();
+      
   }
     
 }
+

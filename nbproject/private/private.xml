@@ -2,16 +2,6 @@
 <project-private xmlns="http://www.netbeans.org/ns/project-private/1">
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
-        <group>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/nsat/Cruza.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/equiscuadrada/Cruza.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/equiscuadrada/Muta.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/nsat/Muta.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/equiscuadrada/GeneticoX2.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/nsat/Seleccion.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/equiscuadrada/Seleccion.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/nsat/Poblacion.java</file>
-            <file>file:/D:/Documents/6to%20Semestre/Algoritmos%20Geneticos/AlgoritmosGeneticos/src/nsat/GeneticoSAT.java</file>
-        </group>
+        <group/>
     </open-files>
 </project-private>
