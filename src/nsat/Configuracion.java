@@ -5,12 +5,8 @@
  */
 package nsat;
 
-import nreinas.*;
 
-/**
- *
- * @author Roberto Cruz Leija
- */
+
 public class Configuracion {
    private int numGeneraciones;
    private int tamPoblacion;
@@ -22,36 +18,36 @@ public class Configuracion {
    private String id;
    
    
-    public Configuracion(String id, int numGeneraciones, int tamPoblacion, double probMuta, double pMuestra, Seleccion.TipoSeleccion[] tipoSeleccion, int tamGenotipo) {
+    public Configuracion(String id, int numGeneraciones, int tamPoblacion, double probMuta, double pMuestra, Seleccion.TipoSeleccion[] tipoSeleccion) {
         this.numGeneraciones = numGeneraciones;
         this.tamPoblacion = tamPoblacion;
         this.probMuta = probMuta;
         this.pMuestra = pMuestra;
-        this.mask = Cruza.generarMascaraAleatoria(tamGenotipo);
+        this.mask = Cruza.generarMascaraAleatoria(100);
         this.tipoSeleccion = tipoSeleccion;
-        this.tamGenotipo = tamGenotipo;
+        this.tamGenotipo = 100;
         this.id=id;
     }
    
-    public Configuracion(int numGeneraciones, int tamPoblacion, double probMuta, double pMuestra, Seleccion.TipoSeleccion[] tipoSeleccion, int tamGenotipo) {
+    public Configuracion(int numGeneraciones, int tamPoblacion, double probMuta, double pMuestra, Seleccion.TipoSeleccion[] tipoSeleccion) {
         this.numGeneraciones = numGeneraciones;
         this.tamPoblacion = tamPoblacion;
         this.probMuta = probMuta;
         this.pMuestra = pMuestra;
         this.mask = Cruza.generarMascaraAleatoria(tamGenotipo);
         this.tipoSeleccion = tipoSeleccion;
-        this.tamGenotipo = tamGenotipo;
+        this.tamGenotipo = 100;
         id="";
     }
     
-   public Configuracion(int tamGenotipo) {
+   public Configuracion() {
         this.numGeneraciones = 10000;
         this.tamPoblacion = 50;
         this.probMuta = 0.2;
         this.pMuestra = 0.2;
-        this.mask = Cruza.generarMascaraAleatoria(tamGenotipo);
+        this.mask = Cruza.generarMascaraAleatoria(100);
         this.tipoSeleccion = new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.TORNEO,Seleccion.TipoSeleccion.RANDOM};
-        this.tamGenotipo = tamGenotipo;
+        this.tamGenotipo = 100;
         id="";
     }
    
@@ -156,25 +152,9 @@ public class Configuracion {
         this.tipoSeleccion = tipoSeleccion;
     }
 
-    /**
-     * @return the tamGenotipo
-     */
-    public int getTamGenotipo() {
-        return tamGenotipo;
-    }
-
-    /**
-     * @param tamGenotipo the tamGenotipo to set
-     */
-    public void setTamGenotipo(int tamGenotipo) {
-        this.tamGenotipo = tamGenotipo;
-    }
-    
-
+  
     public String getId() {
         return id;
     }
-    
-    
-    
+      
 }

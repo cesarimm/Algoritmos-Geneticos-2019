@@ -15,61 +15,72 @@ import java.util.Date;
  *
  * @author CESAR IVAN MTZ
  */
-public class GeneticoSAT {
+public class GeneticoSAT implements Runnable{
     
-    //#Generaciones, Tam Poblacion. #Probabilidad de muta, pendiente considerar una probabilidad de muestreo.
-    private int tamPob, numGen;
-    private double probMuta;
-    private Poblacion poblacionSAT;
-    private int mask[];
+//    //#Generaciones, Tam Poblacion. #Probabilidad de muta, pendiente considerar una probabilidad de muestreo.
+//    private int tamPob, numGen;
+//    private double probMuta;
+//    private Poblacion poblacionSAT;
+//    private int mask[];
+//    
+//    //Crear una poblacion de individuos
+//    //Crear Operadores Muta, Cruza, Seleccion
+//    //Dentro de GeneticosSAT evolucionar el algoritmo genetico
+//    
+//    //Crear un metodo para guardar al mejor individuo o el que satisfaga los 550, dentro de un txt.
+//    
+//    public GeneticoSAT(int tamPob, int numGen, double probMuta){
+//        this.numGen=numGen;
+//        this.tamPob=tamPob;
+//        this.probMuta=probMuta;
+//        this.poblacionSAT = new Poblacion(this.tamPob);
+//        this.mask = Cruza.generarMascaraAleatoria(100);
+//        System.out.println("");
+//    }
     
-    //Crear una poblacion de individuos
-    //Crear Operadores Muta, Cruza, Seleccion
-    //Dentro de GeneticosSAT evolucionar el algoritmo genetico
+    private Poblacion poblacionActual;
+    private Configuracion manager;
+
     
-    //Crear un metodo para guardar al mejor individuo o el que satisfaga los 550, dentro de un txt.
-    
-    public GeneticoSAT(int tamPob, int numGen, double probMuta){
-        this.numGen=numGen;
-        this.tamPob=tamPob;
-        this.probMuta=probMuta;
-        this.poblacionSAT = new Poblacion(this.tamPob);
-        this.mask = Cruza.generarMascaraAleatoria(100);
-        System.out.println("");
+
+    public GeneticoSAT(Configuracion manager) {
+        this.manager = manager;
+        this.poblacionActual = new Poblacion(this.manager.getTamPoblacion());
+        
     }
     
        public void evolucionar(){
-    int mask2[] = Cruza.generarMascaraAleatoria(100);
+    ///int mask2[] = Cruza.generarMascaraAleatoria(100);
     Individuo mejor = null;
     // generar las itereaciones para las generaciones
-    for(int g=1;g<this.numGen;g++){
+    for(int g=1;g<this.manager.getNumGeneraciones();g++){
         // garantizar construir una nueva población
         ArrayList<Individuo> ind = new ArrayList<>();
-        for(int i=0; i<this.tamPob;i++){
+        for(int i=0; i<this.manager.getTamPoblacion();i++){
             // seleccionamos
-            Individuo madre = Seleccion.seleccionTorneo(this.poblacionSAT);
-            Individuo padre = Seleccion.seleccionAleatoria(this.poblacionSAT);
+            Individuo madre = this.manager.aplicarSeleccion(poblacionActual,0);
+            Individuo padre = this.manager.aplicarSeleccion(poblacionActual,1);
             
             // reproducimos
-            Individuo hijo = Cruza.cruzaXMascara(mask2, madre, padre);
+            Individuo hijo = Cruza.cruzaXMascara(this.manager.getMask(), madre, padre);
             // mutamos 
                 // evaluar la probabilidad
-            Muta.mutaBit(probMuta, hijo);
+            Muta.mutaBit(this.manager.getProbMuta(), hijo);
             // agregamos
             ind.add(hijo);
         }
         // actualizamos la nueva población
-        this.poblacionSAT = new Poblacion(ind);
+        this.poblacionActual = new Poblacion(ind);
        // pedimos el mejor a la poblacion 
-       mejor  = this.poblacionSAT.getMejor();
+       mejor  = this.poblacionActual.getMejor();
        System.out.println(g+": "+mejor.getFitness());
-       if(this.poblacionSAT.getMejor().getFitness()==550)
+       if(this.poblacionActual.getMejor().getFitness()==550)
            break;
     }
     
     System.out.println(mejor.getFitness());
     System.out.println(Arrays.toString(mejor.getGenotipo()));
-        if(this.poblacionSAT.getMejor().getFitness()==550)
+        if(this.poblacionActual.getMejor().getFitness()==550)
             this.escribirIndividuo();
        }
     
@@ -87,7 +98,7 @@ public class GeneticoSAT {
 
 
             //Escribimos en el archivo con el metodo write 
-            escribir.write(Arrays.toString(this.poblacionSAT.getMejor().getGenotipo()));
+            escribir.write(Arrays.toString(this.poblacionActual.getMejor().getGenotipo()));
          
             //Cerramos la conexion
             escribir.close();
@@ -97,13 +108,33 @@ public class GeneticoSAT {
         }
     }
 
+        public Configuracion getManager() {
+        return manager;
+    }
+
+    
+    public Poblacion getPoblacionActual() {
+        return poblacionActual;
+    }
+
+    public void setPoblacionActual(Poblacion poblacionActual) {
+        this.poblacionActual = poblacionActual;
+    }
+    
+      @Override
+    public void run() {
+           evolucionar();
+    }
+    
+    
   public static void main(String args[]){
-      Tokenizador.leerDatos();
-      
-      GeneticoSAT gSAT = new GeneticoSAT(100, 100000, .25);
-      gSAT.evolucionar();
+//      Tokenizador.leerDatos();
+//      
+//      GeneticoSAT gSAT = new GeneticoSAT(100, 100000, .25);
+//      gSAT.evolucionar();
       
   }
-    
+
+  
 }
 
