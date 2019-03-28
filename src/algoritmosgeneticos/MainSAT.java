@@ -27,7 +27,7 @@ public class MainSAT {
         Configuracion c2 = new Configuracion(500000, 50, 0.2, 0.1, new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.RANDOM,Seleccion.TipoSeleccion.TORNEO});
         
         configuraciones.add(c1);
-       // configuraciones.add(c2);
+        configuraciones.add(c2);
         
         
         // manager

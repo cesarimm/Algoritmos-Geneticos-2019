@@ -5,6 +5,8 @@
  */
 package nsat;
 
+import java.io.File;
+import java.io.FileWriter;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -24,58 +26,12 @@ public class SATManager implements Runnable{
         this.poblacionActual = new Poblacion(this.manager.getTamPoblacion());   
     }
     
-    public void evolucionar2(){
-    //int mask[] = Cruza.generarMascaraAleatoria(100);
-    Individuo mejor = null;
-    // generar las itereaciones para las generaciones
-    for(int g=1;g<this.manager.getNumGeneraciones();g++){
-        // garantizar construir una nueva población
-            ArrayList<Individuo> ind=new ArrayList<>();
-             //calcular un N
-            int n = (int)(this.manager.getTamPoblacion()*this.manager.getpMuestra());
-            if (n>0){
-            ind = new ArrayList<>();
-            ind.add(this.poblacionActual.getMejor());
-
-            }else {
-            ind = new ArrayList<>();
-            }
-        for(int i=0; i<this.manager.getTamPoblacion();i++){
-            // seleccionamos
-            Individuo madre = Seleccion.seleccionTorneo(this.poblacionActual);
-            Individuo padre = Seleccion.seleccionAleatoria(this.poblacionActual);
-            
-            // reproducimos
-            Individuo hijo = Cruza.cruzaXMascara(this.manager.getMask(), madre, padre);
-            // mutamos 
-                // evaluar la probabilidad
-            Muta.mutaBit(this.manager.getProbMuta(), hijo);
-            // agregamos
-            ind.add(hijo);
-            
-        }
-        // actualizamos la nueva población
-        this.poblacionActual = new Poblacion(ind);
-       // pedimos el mejor a la poblacion 
-       mejor  = this.poblacionActual.getMejor();
-   
-        System.out.println(g+": "+mejor.getFitness());
-    }
     
-    System.out.println(mejor.getFitness());
-    System.out.println(Arrays.toString(mejor.getGenotipo()));
-    }
-    
-    public void evolucionar(){
-        // generar las itereaciones para las generaciones
+    public void evolucionar(){  
         for(int g=1;g<this.manager.getNumGeneraciones();g++){
-            // garantizar construir una nueva población
             ArrayList<Individuo> ind=null;
-            // calcular un N
             int n = (int)(this.manager.getTamPoblacion()*this.manager.getpMuestra());
-            System.out.println("");
             if (n>0){
-                System.out.println("");
             ind = new ArrayList<>();
             ind.add(this.poblacionActual.getMejor());
 
@@ -83,26 +39,29 @@ public class SATManager implements Runnable{
             ind = new ArrayList<>();
             }
             for(int i=n; i<this.manager.getTamPoblacion();i++){
-                // seleccionamos
+                // Seleccion
                 Individuo madre = this.manager.aplicarSeleccion(poblacionActual,0);
                 Individuo padre = this.manager.aplicarSeleccion(poblacionActual,1);
-                // reproducimos
+                // Cruza
                 Individuo hijo = Cruza.cruzaXMascara(this.manager.getMask(), madre, padre);
-                // mutamos 
-                // evaluar la probabilidad
+                // Mutar de acuerdo a la probabilidad
                 Muta.mutaBit(this.manager.getProbMuta(), hijo);
-                // agregamos
+                //Agregar a la lista
                 ind.add(hijo);
             }
-            // actualizamos la nueva población
-            this.poblacionActual = new Poblacion(ind);
-        
+           this.poblacionActual = new Poblacion(ind);
+           
         Individuo mejor  = this.poblacionActual.getMejor();
-
         int f = mejor.getFitness();
         System.out.println("g: "+g+" f:"+f+" id:"+this.hashCode());
-            
+        
+        if(this.poblacionActual.getMejor().getFitness()==550)
+           break;
        }
+        
+        //Escribir el archivo si solo si el mejor es igual a 550, dando solucion a lo coloquialemente conocido como la aguja en e
+        if(this.poblacionActual.getMejor().getFitness()==550)
+            this.escribirIndividuo();
   }
 
     public Configuracion getManager() {
@@ -118,11 +77,30 @@ public class SATManager implements Runnable{
         this.poblacionActual = poblacionActual;
     }
     
-    
+      private void escribirIndividuo(){
+            try {
+                //Crear un objeto File se encarga de crear o abrir acceso a un archivo que se especifica en su constructor
+                File archivo = new File("Geno550.txt");
+
+                //Crear objeto FileWriter que sera el que nos ayude a escribir sobre archivo
+                FileWriter escribir = new FileWriter(archivo, true);
+
+
+                //Escribimos en el archivo con el metodo write 
+                escribir.write(Arrays.toString(this.poblacionActual.getMejor().getGenotipo()));
+
+                //Cerramos la conexion
+                escribir.close();
+            } //Si existe un problema al escribir cae aqui
+            catch (Exception e) {
+                System.out.println("Error al escribir");
+            }
+    }
 
     @Override
     public void run() {
-        evolucionar2();
+        evolucionar();
     }
+    
     
 }
