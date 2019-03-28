@@ -15,7 +15,7 @@ public class Manager {
     private String id;
     private int nG;
     private boolean ejecucion;
-    private ArrayList<GeneticoSAT> geneticos;
+    private ArrayList<SATManager> geneticos;
     private ArrayList<Configuracion> configuraciones;
  
     
@@ -32,23 +32,25 @@ public class Manager {
     this.nG = configuraciones.size();
     for (int x=0; x<nG;x++){
         this.configuraciones.add(configuraciones.get(x));
-        GeneticoSAT gen = new GeneticoSAT(configuraciones.get(x));
+        //GeneticoSAT gen = new GeneticoSAT(configuraciones.get(x));
+        SATManager gen = new SATManager(configuraciones.get(x));
         this.geneticos.add(gen);
-    }
+    }      
     }
     
     public void generarGeneticos(int nG){
     // crear los geneticos en base a las configuraciones
     for (int x=0; x<nG;x++){
        this.configuraciones.add(new Configuracion());
-        GeneticoSAT gen = new GeneticoSAT(configuraciones.get(x));
+        //GeneticoSAT gen = new GeneticoSAT(configuraciones.get(x));
+        SATManager gen = new SATManager(configuraciones.get(x));
         this.geneticos.add(gen);
     }
     }
     
-      public void ejecutarGeneticos(){
+    public void ejecutarGeneticos(){
     // ejecutar los geneticos en un hilo diferente
-    for (GeneticoSAT aux: this.geneticos){
+    for (SATManager aux: this.geneticos){
     Thread hilo = new Thread(aux);
     hilo.start();
     }
@@ -71,9 +73,6 @@ public class Manager {
       
         Individuo ind=this.geneticos.get(conf2).getPoblacionActual().getMejor();
         this.geneticos.get(conf1).getPoblacionActual().setMejor(ind);
-  
-          for(int i=0;i<100;i++)
-            System.out.println("Seleccionar Mejor");
     }
     
     
@@ -83,8 +82,6 @@ public class Manager {
         this.configuraciones.get(conf1).setTamPoblacion(n);
         this.geneticos.get(conf1).getPoblacionActual().setMejores(individuos);
         
-          for(int i=0;i<100;i++)
-            System.out.println("Cambiar varios");
     }
     
     

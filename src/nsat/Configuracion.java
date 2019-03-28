@@ -14,7 +14,6 @@ public class Configuracion {
    private double pMuestra;
    private int mask[];
    private Seleccion.TipoSeleccion tipoSeleccion[];
-   private int tamGenotipo;
    private String id;
    
    
@@ -25,7 +24,6 @@ public class Configuracion {
         this.pMuestra = pMuestra;
         this.mask = Cruza.generarMascaraAleatoria(100);
         this.tipoSeleccion = tipoSeleccion;
-        this.tamGenotipo = 100;
         this.id=id;
     }
    
@@ -34,9 +32,8 @@ public class Configuracion {
         this.tamPoblacion = tamPoblacion;
         this.probMuta = probMuta;
         this.pMuestra = pMuestra;
-        this.mask = Cruza.generarMascaraAleatoria(tamGenotipo);
+        this.mask = Cruza.generarMascaraAleatoria(100);
         this.tipoSeleccion = tipoSeleccion;
-        this.tamGenotipo = 100;
         id="";
     }
     
@@ -47,14 +44,12 @@ public class Configuracion {
         this.pMuestra = 0.2;
         this.mask = Cruza.generarMascaraAleatoria(100);
         this.tipoSeleccion = new Seleccion.TipoSeleccion[]{Seleccion.TipoSeleccion.TORNEO,Seleccion.TipoSeleccion.RANDOM};
-        this.tamGenotipo = 100;
         id="";
     }
    
    
    public Individuo aplicarSeleccion(Poblacion pobActual, int i){
        Individuo aux = null; 
-       // evaluar i
        switch(getTipoSeleccion()[i]){
            case RANDOM:{
              aux = Seleccion.seleccionAleatoria(pobActual);
@@ -68,86 +63,61 @@ public class Configuracion {
    return aux;
    }
 
-    /**
-     * @return the numGeneraciones
-     */
+   
     public int getNumGeneraciones() {
         return numGeneraciones;
     }
 
-    /**
-     * @param numGeneraciones the numGeneraciones to set
-     */
+    
     public void setNumGeneraciones(int numGeneraciones) {
         this.numGeneraciones = numGeneraciones;
     }
 
-    /**
-     * @return the tamPoblacion
-     */
+   
     public int getTamPoblacion() {
         return tamPoblacion;
     }
 
-    /**
-     * @param tamPoblacion the tamPoblacion to set
-     */
+  
     public void setTamPoblacion(int tamPoblacion) {
         this.tamPoblacion = tamPoblacion;
     }
 
-    /**
-     * @return the probMuta
-     */
+   
     public double getProbMuta() {
         return probMuta;
     }
 
-    /**
-     * @param probMuta the probMuta to set
-     */
     public void setProbMuta(double probMuta) {
         this.probMuta = probMuta;
     }
 
-    /**
-     * @return the pMuestra
-     */
+   
     public double getpMuestra() {
         return pMuestra;
     }
 
-    /**
-     * @param pMuestra the pMuestra to set
-     */
+   
     public void setpMuestra(double pMuestra) {
         this.pMuestra = pMuestra;
     }
 
-    /**
-     * @return the mask
-     */
+   
     public int[] getMask() {
         return mask;
     }
 
-    /**
-     * @param mask the mask to set
-     */
+   
     public void setMask(int[] mask) {
         this.mask = mask;
     }
 
-    /**
-     * @return the tipoSeleccion
-     */
+  
     public Seleccion.TipoSeleccion[] getTipoSeleccion() {
         return tipoSeleccion;
     }
 
-    /**
-     * @param tipoSeleccion the tipoSeleccion to set
-     */
+    
     public void setTipoSeleccion(Seleccion.TipoSeleccion[] tipoSeleccion) {
         this.tipoSeleccion = tipoSeleccion;
     }
