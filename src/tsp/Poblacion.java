@@ -19,6 +19,7 @@ public class Poblacion {
             this.indivduos.add(new Individuo(numCd,ci));
         
     }
+    
     public Poblacion(ArrayList<Individuo> aux){
         this.indivduos = (ArrayList<Individuo>)aux.clone();
     }
@@ -38,19 +39,19 @@ public class Poblacion {
        }   
       return muestra;
       }
-      
         return (ArrayList<Individuo>) this.indivduos.clone();
     }
+    
     public Individuo getMejor(){
         int idMejor = 0;
         for(int x=1;x<this.indivduos.size();x++){
-            if(this.indivduos.get(x).getFitnessDistancia()>this.indivduos.get(idMejor).getFitnessDistancia()){
+            if(this.indivduos.get(x).getFitnessGeneral()<this.indivduos.get(idMejor).getFitnessGeneral()){
             idMejor = x;
             }
         }
-     return new Individuo(this.indivduos.get(idMejor).getGenotipo());
-       
+     return new Individuo(this.indivduos.get(idMejor).getGenotipo());     
     }
+    
     public ArrayList<Individuo> getMuestraAleatoria(int n){
       // validar que n <= tamaño de la población
       if(n<this.indivduos.size()){
@@ -81,8 +82,8 @@ public class Poblacion {
      for(int z = 1; z < this.indivduos.size(); ++z) {
       for(int v = 0; v < (this.indivduos.size() - z); ++v) {
          
-         if(this.indivduos.get(v).getFitnessDistancia()
-                 > this.indivduos.get(v+1).getFitnessDistancia()){
+         if(this.indivduos.get(v).getFitnessGeneral()
+                 < this.indivduos.get(v+1).getFitnessGeneral()){
             Individuo aux = new Individuo(this.indivduos.get(v).getGenotipo());
             this.indivduos.set(v,new Individuo(this.indivduos.get(v+1).getGenotipo()));
             this.indivduos.set(v+1,aux);

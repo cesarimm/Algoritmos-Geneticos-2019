@@ -26,6 +26,15 @@ public class GeneticoTSP {
         //mejor();
     }
     
+    
+    public GeneticoTSP(int numG, int tamP,  double pMuta, Poblacion p) {
+        this.numG = numG;
+        this.tamP = tamP;
+        this.pMuta = pMuta;
+        this.poblacionActual = p;
+        //mejor();
+    }
+    
     public void evolucionar(){
         Grafica grafica = new Grafica("Puntos ", "Distancias","Inclinaciones");
         grafica.crearSerie("0");
@@ -37,7 +46,8 @@ public class GeneticoTSP {
         for(int i=0; i<this.tamP;i++){
             // seleccionamos
             Individuo madre = Seleccion.seleccionTorneo(this.poblacionActual);
-            Individuo padre = Seleccion.seleccionAleatoria(this.poblacionActual);
+            //Individuo padre = Seleccion.seleccionTorneo(this.poblacionActual);
+           Individuo padre = Seleccion.seleccionAleatoria(this.poblacionActual);
             
             // reproducimos
             Individuo hijo = Cruza.cruzaAsexual(madre, padre);
@@ -52,20 +62,16 @@ public class GeneticoTSP {
        // pedimos el mejor a la poblacion 
        mejor  = this.poblacionActual.getMejor();
        grafica.crearPuntoASerie("0",mejor.getFitnessDistancia(),mejor.getFitnessInclinacion());
-        System.out.println(g+": "+mejor.getFitnessGeneral());
+       System.out.println(g+": "+mejor.getFitnessGeneral()+" Inc: "+mejor.getFitnessInclinacion()+" Dis: "+mejor.getFitnessDistancia());
     }
     
     grafica.crearGrafica();
     
     }
 
-    public static void main(String[] args){
-        
-        Herramientas.cargarDistancias();
-        GeneticoTSP g = new GeneticoTSP(100000,100,Herramientas.distancias.length,0,0.001); 
-        g.evolucionar();
-        
-        
-        
-    }  
+//    public static void main(String[] args){      
+//        Herramientas.cargarDistancias();
+//        GeneticoTSP g = new GeneticoTSP(100000,100,Herramientas.distancias.length,0,0.001); 
+//        g.evolucionar();   
+//    }  
 }

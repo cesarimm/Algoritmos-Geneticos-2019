@@ -26,7 +26,6 @@ public class Muta {
         // actualizamos el fenotipo y el fitness
         ind.actualizarIndividuo();
         
-    }
-       
+    }     
    }
 }

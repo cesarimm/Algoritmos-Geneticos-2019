@@ -30,8 +30,9 @@ public class Individuo {
         generarGenotipoAleatorio();
         calcularFitnessDistancia();
         calcularFitnessGeneral();
-          calcularGastoCombustible();
+        calcularGastoCombustible();
     }
+    
     public Individuo(int genotipo[]){
          this.n = genotipo.length;
          this.ci = genotipo[0];
@@ -41,6 +42,7 @@ public class Individuo {
          calcularFitnessGeneral();
          calcularGastoCombustible();
     }
+    
     private void generarGenotipoAleatorio() {
        this.genotipo = new int[this.n];
         ArrayList<Integer> lista = new ArrayList<>();
@@ -55,10 +57,10 @@ public class Individuo {
         for(int x=1; x<this.genotipo.length;x++){
              int i = ran.nextInt(lista.size());
              this.genotipo[x]=lista.remove(i);
-        }
-        
-       
+        }     
     }
+    
+    
     public void actualizarIndividuo(){ 
        calcularFitnessDistancia();
        calcularFitnessInclinacion();
@@ -85,10 +87,10 @@ public class Individuo {
         
         // recorrer el individudo y consultamos las inclinaciones
         for (int x=0 ; x<this.genotipo.length-1;x++){
-            this.fitnessInclinacion+=Herramientas.inclinaciones[this.genotipo[x]]-Herramientas.inclinaciones[this.genotipo[x+1]];
+            this.fitnessInclinacion+=Herramientas.inclinaciones[this.genotipo[x+1]]-Herramientas.inclinaciones[this.genotipo[x]];
         }
      // agregamos la inclinacion de la ultima a la inicial
-     this.fitnessInclinacion+=Herramientas.inclinaciones[this.genotipo[this.genotipo.length-1]]-Herramientas.inclinaciones[this.genotipo[0]];
+         this.fitnessInclinacion+=Herramientas.inclinaciones[this.genotipo[this.genotipo.length-1]]-Herramientas.inclinaciones[this.genotipo[0]];
     
     }
     
@@ -132,7 +134,8 @@ public class Individuo {
      
     private void calcularFitnessGeneral(){
         // 1er Forma 
-        this.fitnessGeneral = (0.5)*Math.abs(fitnessDistancia)+(0.5)*Math.abs(fitnessInclinacion);
+        //this.fitnessGeneral = (0.5)*Math.abs(fitnessDistancia)+(0.2)*Math.abs(fitnessInclinacion);
+        this.fitnessGeneral = ((0.5)*this.fitnessDistancia)+((0.2)*fitnessInclinacion); 
     }
 
     /**

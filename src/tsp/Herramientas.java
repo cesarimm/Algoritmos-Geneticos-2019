@@ -104,6 +104,46 @@ public class Herramientas {
         }          
     }
     
+    
+     public static void cargarInclinaciones()  {
+        FileReader archivos = null;
+        try {
+            String cadena;
+            JFileChooser file = new JFileChooser();
+            file.showOpenDialog(file);
+            //abrimos el archivo seleccionado
+            File abre = file.getSelectedFile();
+            archivos = new FileReader(abre);
+            BufferedReader lee = new BufferedReader(archivos);
+            String[] datos = null;
+            //ArrayList<ArrayList<Double>> Matriz = new ArrayList();
+            if (abre != null) {
+                int i=0;
+              
+                while ((cadena = lee.readLine()) != null) {
+                     datos = cadena.split(",");
+                }
+                
+                lee.close();
+                
+                 inclinaciones = new double[datos.length];
+                    for (int j = 0; j < datos.length; j++)
+                        inclinaciones[j]=Double.parseDouble(datos[j]);
+            }  
+            System.out.println("");
+        } catch (FileNotFoundException ex) {            
+            Logger.getLogger(Herramientas.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Herramientas.class.getName()).log(Level.SEVERE, null, ex);
+        } finally {
+            try {
+                archivos.close();
+            } catch (IOException ex) {
+                Logger.getLogger(Herramientas.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }          
+    }
+    
     public static void guardarDistancias(){
     
     }
