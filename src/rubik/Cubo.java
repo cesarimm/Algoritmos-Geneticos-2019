@@ -5,21 +5,38 @@
  */
 package rubik;
 
+import static java.lang.Math.random;
+import java.util.Random;
+
 /**
  *
  * @author CESAR IVAN MTZ
  */
 public class Cubo {
     
-    private char white[], green[], yellow[], blue[], red[], orange[];
+    private char white[]={'w','w','w','w','w','w','w','w','w'}, green[]={'g','g','g','g','g','g','g','g','g'}, 
+                yellow[]={'y','y','y','y','y','y','y','y','y'},  blue[]={'b','b','b','b','b','b','b','b','b'}, 
+                  red[]={'r','r','r','r','r','r','r','r','r'}, orange[]={'o','o','o','o','o','o','o','o','o'};
+    
+   // private char[][] caras = {white, green, yellow, blue, red, orange};
+    
+    private int fitness;
+    private int fenotipo[];
     
     public Cubo(){
-        white = new char[]{'w','w','w','w','w','w','w','w','w'};
-        green = new char[]{'g','g','g','g','g','g','g','g','g'};
-        yellow = new char[]{'y','y','y','y','y','y','y','y','y'};
-        blue = new char[]{'b','b','b','b','b','b','b','b','b'};
-        red = new char[]{'r','r','r','r','r','r','r','r','r'};
-        orange = new char[]{'o','o','o','o','o','o','o','o','o'};
+//        white = new char[]{'w','w','w','w','w','w','w','w','w'};
+//        green = new char[]{'g','g','g','g','g','g','g','g','g'};
+//        yellow = new char[]{'y','y','y','y','y','y','y','y','y'};
+//        blue = new char[]{'b','b','b','b','b','b','b','b','b'};
+//        red = new char[]{'r','r','r','r','r','r','r','r','r'};
+//        orange = new char[]{'o','o','o','o','o','o','o','o','o'};
+    }
+    
+     public Cubo(int tam){
+         ejecutarEscramble(new int[]{1,8,8,4,4,11,11,3,9,9,3,6,6,3,3,11,11,2,8,10,5,12,3,10,3,5,2});
+         System.out.println("");
+         generarGenotipoAleatorio(tam);   
+         ejecutarEscramble(this.fenotipo);
     }
     
     public void ejecutarEscramble(int movimientos[]){
@@ -409,11 +426,53 @@ public class Cubo {
         arreglo[6] = green[0];
         arreglo[7] = green[3];
         arreglo[8] = green[6];    
-        }     
+        }
+        actualizarFitness();
         return arreglo;
     }
 
+        private void actualizarFitness() {
+            int aux=0;
+    
+          for(int i=0;i<9;i++)
+              if(white[i]==white[4])
+                   aux++;
+          
+          for(int i=0;i<9;i++)
+              if(green[i]==green[4])
+                   aux++;
+          
+          for(int i=0;i<9;i++)
+              if(yellow[i]==yellow[4])
+                   aux++;
+          
+           for(int i=0;i<9;i++)
+              if(blue[i]==blue[4])
+                   aux++;
+           
+            for(int i=0;i<9;i++)
+              if(red[i]==red[4])
+                   aux++;
+            
+            for(int i=0;i<9;i++)
+              if(orange[i]==orange[4])
+                   aux++;
+          
+         this.fitness=aux;
+        }
+        
+        
+       private void generarGenotipoAleatorio(int n) {
+         this.fenotipo = new int[n];
+           for (int i = 0; i < fenotipo.length; i++) {
+               Random r = new Random(); 
+               fenotipo[i]=r.nextInt(12)+1;
+           }
+       }
+       
+     
 
+         
     public static void main(String args[]){
         
         // 1 front
@@ -429,15 +488,22 @@ public class Cubo {
         // 11 down 
         // 12 down primo
         
-     Cubo c = new Cubo();
+       Cubo c = new Cubo(10);
 //     c.left(true);
 //        System.out.println("");
 //     c.up(false);
 //        System.out.println("");
 //     c.down(false);
        //Errror en 11 = down
-        c.ejecutarEscramble(new int[]{5,5,1,1,5,5,9,5,5,3,3,11,9,9,7,7,10,5,11,11,9,1,6,3,3,10,1,10,5,5});
+        //c.ejecutarEscramble(new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
+       // c.ejecutarEscramble(new int[]{1,8,8,4,4,11,11,3,9,9,3,6,6,3,3,11,11,2,8,10,5,12,3,10,3,5,2});
+       // c.ejecutarEscramble(new int[]{5,5,1,1,5,5,9,5,5,3,3,11,9,9,7,7,10,5,11,11,9,1,6,3,3,10,1,10,5,5});
         System.out.println("");
     }
+
+    
+   
+
+    
     
 }

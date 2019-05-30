@@ -36,6 +36,7 @@ public class Individuo {
             aux[x]= ran.nextInt(2);
         return aux;
     }
+    
     public void actualizarIndividuo(){
      this.fenotipo = calcularFenotipo();
         this.fitness = this.fenotipo;
