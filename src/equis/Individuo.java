@@ -24,11 +24,13 @@ public class Individuo {
         this.fenotipo = calcularFenotipo();
         this.fitness = this.fenotipo;
     }
+    
     public Individuo(int genotipo[]){
         this.genotipo = genotipo.clone();
         this.fenotipo = calcularFenotipo();
         this.fitness = this.fenotipo;
     }
+    
     private int[] generarGenotipoAleatorio() {
         int aux [] = new int[24];
         Random ran = new Random();

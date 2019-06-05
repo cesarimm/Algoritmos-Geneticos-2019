@@ -18,30 +18,45 @@ public class Cubo {
                 yellow[]={'y','y','y','y','y','y','y','y','y'},  blue[]={'b','b','b','b','b','b','b','b','b'}, 
                   red[]={'r','r','r','r','r','r','r','r','r'}, orange[]={'o','o','o','o','o','o','o','o','o'};
     
-   // private char[][] caras = {white, green, yellow, blue, red, orange};
+     private char[][] carasAux = {new char[9], new char[9], new char[9], new char[9], new char[9], new char[9]};
+    
     
     private int fitness;
-    private int fenotipo[];
+    private int genotipo[];
     
-    public Cubo(){
-//        white = new char[]{'w','w','w','w','w','w','w','w','w'};
-//        green = new char[]{'g','g','g','g','g','g','g','g','g'};
-//        yellow = new char[]{'y','y','y','y','y','y','y','y','y'};
-//        blue = new char[]{'b','b','b','b','b','b','b','b','b'};
-//        red = new char[]{'r','r','r','r','r','r','r','r','r'};
-//        orange = new char[]{'o','o','o','o','o','o','o','o','o'};
+    public Cubo(int [] genotipo, char[][] mascaras){
+            this.carasAux = mascaras;
+            this.genotipo=genotipo.clone();
+            this.calcularFitness();
     }
     
-     public Cubo(int tam){
-         ejecutarEscramble(new int[]{1,8,8,4,4,11,11,3,9,9,3,6,6,3,3,11,11,2,8,10,5,12,3,10,3,5,2});
-         System.out.println("");
-         generarGenotipoAleatorio(tam);   
-         ejecutarEscramble(this.fenotipo);
+     public Cubo(int tam, int[] scramble){
+          ejecutarEscramble(scramble);
+          generarGenotipoAleatorio(tam);  
     }
-    
+     
     public void ejecutarEscramble(int movimientos[]){
         for (int i = 0; i < movimientos.length; i++) 
-          ejecutarMovimiento(movimientos[i]);     
+          ejecutarMovimiento(movimientos[i]);
+                    
+           this.carasAux[0]=this.white.clone();
+           this.carasAux[1]=this.green.clone();
+           this.carasAux[2]= this.yellow.clone();
+           this.carasAux[3]= this.blue.clone();
+           this.carasAux[4]= this.red.clone();
+           this.carasAux[5]= this.orange.clone();   
+    }
+    
+    
+     public void calcularFitness(){    
+           this.white =this.carasAux[0].clone();
+           this.green=this.carasAux[1].clone();
+           this.yellow =this.carasAux[2].clone();
+           this.blue=this.carasAux[3].clone();
+           this.red =this.carasAux[4].clone();
+           this.orange=this.carasAux[5].clone();    
+        for (int i = 0; i < this.getGenotipo().length; i++) 
+          ejecutarMovimiento(genotipo[i]);     
     }
     
     public void ejecutarMovimiento(int mov){
@@ -92,15 +107,13 @@ public class Cubo {
             break;
             case 11: 
               down(false); 
-                System.out.println("");
             break;   
             case 12: 
               down(true);  
             break;
             default: break;
-        }
-        
-        System.out.println("");
+        }      
+
     }
     
     public void front(boolean primo){
@@ -404,7 +417,7 @@ public class Cubo {
             }         
     }  
        
-         private char[] actualizarCara(char[] green, boolean primo) {
+        private char[] actualizarCara(char[] green, boolean primo) {
         char arreglo[] = new char[9];
         if(!primo){
         arreglo[0] = green[6];
@@ -463,13 +476,25 @@ public class Cubo {
         
         
        private void generarGenotipoAleatorio(int n) {
-         this.fenotipo = new int[n];
-           for (int i = 0; i < fenotipo.length; i++) {
+         this.genotipo = new int[n];
+           for (int i = 0; i < genotipo.length; i++) {
                Random r = new Random(); 
-               fenotipo[i]=r.nextInt(12)+1;
+               genotipo[i]=r.nextInt(12)+1;
            }
        }
+
+    public int getFitness() {
+        return fitness;
+    }
+
+    public int[] getGenotipo() {
+        return genotipo;
+    }
        
+    
+    public char[][] getEstadoMascaras(){
+     return this.carasAux;
+    }
      
 
          
@@ -488,17 +513,14 @@ public class Cubo {
         // 11 down 
         // 12 down primo
         
-       Cubo c = new Cubo(10);
-//     c.left(true);
-//        System.out.println("");
-//     c.up(false);
-//        System.out.println("");
-//     c.down(false);
+       Cubo c = new Cubo(10, new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
+       c.calcularFitness();
+       System.out.println("Fitness: "+c.getFitness());
        //Errror en 11 = down
-        //c.ejecutarEscramble(new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
+      //  c.ejecutarEscramble(new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
        // c.ejecutarEscramble(new int[]{1,8,8,4,4,11,11,3,9,9,3,6,6,3,3,11,11,2,8,10,5,12,3,10,3,5,2});
        // c.ejecutarEscramble(new int[]{5,5,1,1,5,5,9,5,5,3,3,11,9,9,7,7,10,5,11,11,9,1,6,3,3,10,1,10,5,5});
-        System.out.println("");
+      // c.ejecutarEscramble(movimientos);
     }
 
     
