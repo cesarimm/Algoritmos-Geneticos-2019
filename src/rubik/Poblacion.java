@@ -98,4 +98,9 @@ public class Poblacion {
             
     }
     
+    public void setIndividuo(Cubo nuevo){
+        this.indivduos.remove(indivduos.size());
+        this.indivduos.add(nuevo);
+    }
+    
 }

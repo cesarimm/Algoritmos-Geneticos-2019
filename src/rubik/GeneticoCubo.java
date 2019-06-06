@@ -12,7 +12,7 @@ import java.util.Arrays;
  *
  * @author CESAR IVAN MTZ
  */
-public class GeneticoCubo {
+public class GeneticoCubo implements Runnable{
     // parametros
     private Poblacion poblacionActual;
     private int numG,tamP, tamGen;
@@ -51,12 +51,23 @@ public class GeneticoCubo {
     // pedimos el mejor a la poblacion 
     Cubo mejor  = this.poblacionActual.getMejor();
     //System.out.println(mejor.getFenotipo());
-    System.out.println(mejor.getFitness());
-    System.out.println(Arrays.toString(mejor.getGenotipo()));
+//    System.out.println(mejor.getFitness());
+//    System.out.println(Arrays.toString(mejor.getGenotipo()));
+        System.out.println(mejor.toString());
+    }
+
+    public Poblacion getPoblacionActual() {
+        return poblacionActual;
+    }
+    
+    @Override
+    public void run() {
+        evolucionar();
     }
     
     public static void main(String args[]){
-     GeneticoCubo gc = new GeneticoCubo(10000, 50, .35, 42,new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
+     GeneticoCubo gc = new GeneticoCubo(100, 50, .35, 42,new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
      gc.evolucionar();
     }
+
 }

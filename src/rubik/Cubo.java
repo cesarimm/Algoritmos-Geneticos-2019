@@ -6,6 +6,7 @@
 package rubik;
 
 import static java.lang.Math.random;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -19,6 +20,10 @@ public class Cubo {
                   red[]={'r','r','r','r','r','r','r','r','r'}, orange[]={'o','o','o','o','o','o','o','o','o'};
     
      private char[][] carasAux = {new char[9], new char[9], new char[9], new char[9], new char[9], new char[9]};
+
+    public char[][] getCarasAux() {
+        return carasAux;
+    }
     
     
     private int fitness;
@@ -28,6 +33,11 @@ public class Cubo {
             this.carasAux = mascaras;
             this.genotipo=genotipo.clone();
             this.calcularFitness();
+    }
+
+    public Cubo(int[] genotipo, int[] scramble) {
+        this.genotipo = genotipo;
+          ejecutarEscramble(scramble);
     }
     
      public Cubo(int tam, int[] scramble){
@@ -523,7 +533,20 @@ public class Cubo {
       // c.ejecutarEscramble(movimientos);
     }
 
+//    @Override
+//    public String toString() {
+//        return Arrays.toString(genotipo);
+//    }
+
+    @Override
+    public String toString() {
+        return Arrays.deepToString(carasAux) + "genotipo=" + Arrays.toString(genotipo);
+    }
+
     
+    
+
+     
    
 
     
