@@ -43,6 +43,7 @@ public class Poblacion {
       
         return (ArrayList<Individuo>) this.indivduos.clone();
     }
+    
     public Individuo getMejor(){
         int idMejor = 0;
         for(int x=1;x<this.indivduos.size();x++){

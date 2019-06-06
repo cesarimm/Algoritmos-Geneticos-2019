@@ -29,7 +29,7 @@ public class NewJFrame extends javax.swing.JFrame {
     public NewJFrame() {
         initComponents();
 //        p = new Poblacion(int numInd, int tam, int[] escramble);
-        gc = new GeneticoCubo(10000, 50, .35, 42,new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
+      //  gc = new GeneticoCubo(10000, 50, .35, 42,new int[]{3,3,9,9,2,7,7,4,11,11,8,8,5,5,2,11,6,6,1,7,12,10,2,2,7,3,11,11,2,2});
         iniciarCliente();
 //        gc.run();
     }

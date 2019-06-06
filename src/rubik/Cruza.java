@@ -23,7 +23,8 @@ public class Cruza {
     return mask;
     }
     public static Cubo cruzaXMascara(int mask[], Cubo madre, Cubo padre){
-        Cubo hijo1,hijo2;
+        Cubo hijo1;
+        Cubo hijo2;
         int geno1[] = new int[madre.getGenotipo().length];
         int geno2[] = new int[padre.getGenotipo().length];
     // recorrer la maskara de cruza
@@ -42,9 +43,11 @@ public class Cruza {
     hijo1 = new Cubo(geno1, padre.getEstadoMascaras());
     hijo2 = new Cubo(geno2, madre.getEstadoMascaras());
     
+    
+    
     if (hijo1.getFitness()<hijo2.getFitness()){
-        return hijo1;}
-    else{return hijo2;}
+        return hijo2;}
+    else{return hijo1;}
     
     }
     

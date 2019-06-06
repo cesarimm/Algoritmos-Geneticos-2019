@@ -19,8 +19,7 @@ public class Poblacion {
     public Poblacion(int numInd, int tam, int[] escramble) {
         this.indivduos = new ArrayList<>();
         for(int x=0; x<numInd;x++)
-            this.indivduos.add(new Cubo(tam, escramble));
-        
+            this.indivduos.add(new Cubo(tam, escramble));     
     }
     
     public Poblacion(ArrayList<Cubo> aux){
@@ -45,6 +44,7 @@ public class Poblacion {
       
         return (ArrayList<Cubo>) this.indivduos.clone();
     }
+    
     public Cubo getMejor(){
         int idMejor = 0;
         for(int x=1;x<this.indivduos.size();x++){
@@ -55,6 +55,8 @@ public class Poblacion {
           //Agregar las caras estado actual
      return new Cubo(this.indivduos.get(idMejor).getGenotipo(), this.indivduos.get(idMejor).getEstadoMascaras());   
     }
+    
+      
     public ArrayList<Cubo> getMuestraAleatoria(int n){
       // validar que n <= tamaño de la población
       if(n<this.indivduos.size()){
@@ -101,6 +103,15 @@ public class Poblacion {
     public void setIndividuo(Cubo nuevo){
         this.indivduos.remove(indivduos.size());
         this.indivduos.add(nuevo);
+    }
+    
+      public void setMejor(Cubo cub){
+        this.indivduos.set(0, cub);
+    }
+    
+    
+    public void setMejores(ArrayList<Cubo> cubos){
+        this.indivduos = cubos;
     }
     
 }
